@@ -13,14 +13,17 @@ function getTodo() {
     if (this.readyState === 4 && this.status == 200) {
       // Typical action to be performed when the document is ready:
       //   console.log(`>>> check rest `, request);
-      const data = request.responseText;
+      const data = JSON.parse(request.responseText);
+      const dataString = JSON.stringify(data);
       callback(undefined, data);
+      callback(undefined, dataString);
+      callback(undefined, request.responseText);
     }
     if (this.readyState === 4 && request.status !== 200) {
       callback("error", undefined);
     }
   };
-  request.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+  request.open("GET", "data.json", true);
   request.send();
 }
 
